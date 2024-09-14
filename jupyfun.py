@@ -71,6 +71,11 @@ def meta_from_filename(filename : str, skip : Union[int, Sequence[int]] = None) 
     return dict(zip(keys, map(cast, values)))
 
 
+def by_meta(f):
+    meta = meta_from_filename(f)
+    return list(zip(*sorted(meta.items())))[1]
+
+
 def from_webplotdigitizer(string):
     """
         Take the output from webplotdigitizer and return the two arrays.
@@ -91,3 +96,5 @@ def in_range(x, xmin, xmax, left_closed=True, right_closed=False):
     right = x <= xmax if right_closed else x < xmax
     return left & right
 
+def bin_centers(x):
+    return (x[:-1] + x[1:]) / 2.
