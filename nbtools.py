@@ -107,6 +107,8 @@ def labels(xlabel=None, ylabel=None, title=None):
 
 
 def normhist(x, *args, normto=100, normfactor=None, **kwargs):
+    if "histtype" not in kwargs:
+        kwargs["histtype"] = "step"
     if normfactor is None:
         w = np.full(len(x), normto/len(x))
     else:
