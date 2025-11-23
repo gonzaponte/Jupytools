@@ -17,11 +17,12 @@ def progressbar(iterable, *, flushmod=1, nelements=None, index=False):
         nelements = sum(1 for _ in temp)
 
     dt = 0
-    t0 = time.time()
+    t0 = t00 = time.time()
     for i, value in enumerate(iterable):
         if i % flushmod == 0:
             eta = (nelements - i) * dt
-            print(f"\rItem {i+1} of {nelements} | {dt:.2f} s/item | ETA {eta/60:.1f} min", end="", flush=True)
+            tot = time.time() - t00
+            print(f"\rItem {i+1} of {nelements} | {dt:.2f} s/item | ETA {eta/60:.1f} min | Ellapsed {tot/60:.1f} min", end="", flush=True)
         if index:
             yield i, value
         else:
