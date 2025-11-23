@@ -116,6 +116,16 @@ def normhist(x, *args, normto=100, normfactor=None, **kwargs):
     return plt.hist(x, *args, weights=w, **kwargs)
 
 
+def normhist2d(x, y, *args, normto=100, normfactor=None, **kwargs):
+    if normfactor is None:
+        w = np.full(len(x), normto/len(x))
+    else:
+        w = np.full(len(x), normfactor)
+    if "cmin" not in kwargs:
+        kwargs["cmin"] = w[0]
+    return plt.hist2d(x, y, *args, weights=w, **kwargs)
+
+
 def auto_ylimits(data, factor=1.1):
     low   = min(data)
     low  *= factor if low  < 0 else 1/factor
